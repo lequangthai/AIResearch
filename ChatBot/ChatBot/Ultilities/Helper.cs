@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ChatBot.Ultilities
 {
-    public static class StringExtensions
+    public static class Helper
     {
         public static string FirstCharToUpper(this string input)
         {
@@ -14,6 +14,10 @@ namespace ChatBot.Ultilities
                 default: return input.First().ToString().ToUpper() + input.Substring(1);
             }
         }
-    }
 
+        public static bool IsContainsValue(Type type, string strValue)
+        {
+            return Enum.GetNames(type).Contains(strValue);
+        }
+    }
 }

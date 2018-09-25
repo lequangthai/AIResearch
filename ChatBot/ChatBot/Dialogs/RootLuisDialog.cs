@@ -68,43 +68,20 @@ namespace ChatBot.Dialogs
         private async Task ProccessGetCurrentStatusMessage(IDialogContext context)
         {
             var userSelectedData = GetUserSelectedData(context);
-            if (!userSelectedData.IsHasKeyInfo)
-            {
-                var dialog = new KeyInfoSelectDialog();
-                context.Call(dialog, SelectedKeyInfoProccess);
-
-                return;
-            }
+            if (!IsValidUserSelectedData(userSelectedData, context)) return;
 
             var waitingMessage = _messageBuilderService.ProccessWaitingMessage(userSelectedData);
             await PostMessage(context, waitingMessage);
 
             if (userSelectedData.IsHasKeyInfo || userSelectedData.IsHasLocationName || userSelectedData.IsHasRoomName)
             {
-                await PostMessage(context, _deviceDataService.GetCurrentStatus(userSelectedData));
+                var message = _deviceDataService.GetCurrentStatus(userSelectedData);
+
+                SetUserSelectedData(context, new UserSelectedData());
+                await PostMessage(context, message);
             }
 
             context.Wait(this.MessageReceived);
-        }
-
-        private async Task SelectedKeyInfoProccess(IDialogContext context, IAwaitable<string> input)
-        {
-            var selection = await input;
-
-            if (!string.IsNullOrEmpty(selection))
-            {
-                var userSelectedData = GetUserSelectedData(context);
-                userSelectedData.KeyInfo = selection;
-                SetUserSelectedData(context, userSelectedData);
-
-                await ProccessGetCurrentStatusMessage(context);
-            }
-            else
-            {
-                // Cancel
-                SetUserSelectedData(context, new UserSelectedData());
-                await ProccessGreetingMessage(context);
-            }
         }
 
         private async Task ProccessGreetingMessage(IDialogContext context)
@@ -179,6 +156,59 @@ namespace ChatBot.Dialogs
             }
 
             return (keyInfoEntityRecommendation, locationEntityRecommendation, roomNameRecommendation);
+        }
+        #endregion
+
+        #region Validate UserSelectedData for get data
+        private bool IsValidUserSelectedData(UserSelectedData userSelectedData, IDialogContext context)
+        {
+            if (!userSelectedData.IsHasKeyInfo)
+            {
+                var dialog = new KeyInfoSelectDialog();
+                context.Call(dialog, SelectedKeyInfoProccess);
+
+                return false;
+            }
+
+            if (!userSelectedData.IsHasLocationName)
+            {
+                var dialog = new LocationSelectDialog();
+                context.Call(dialog, SelectedLocationProccess);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task SelectedKeyInfoProccess(IDialogContext context, IAwaitable<string> input)
+        {
+            await SelectedDataProccess(context, input, nameof(UserSelectedData.KeyInfo));
+        }
+
+        private async Task SelectedLocationProccess(IDialogContext context, IAwaitable<string> input)
+        {
+            await SelectedDataProccess(context, input, nameof(UserSelectedData.LocationName));
+        }
+
+        private async Task SelectedDataProccess(IDialogContext context, IAwaitable<string> input, string propertyName)
+        {
+            var selection = await input;
+
+            if (!string.IsNullOrEmpty(selection))
+            {
+                var userSelectedData = GetUserSelectedData(context);
+                typeof(UserSelectedData).GetProperty(propertyName).SetValue(userSelectedData, selection);
+                SetUserSelectedData(context, userSelectedData);
+
+                await ProccessGetCurrentStatusMessage(context);
+            }
+            else
+            {
+                // Cancel
+                SetUserSelectedData(context, new UserSelectedData());
+                await ProccessGreetingMessage(context);
+            }
         }
         #endregion
     }

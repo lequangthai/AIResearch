@@ -8,6 +8,10 @@ namespace ChatBot.Ultilities.Instances
 {
     public class MessageBuilderService : IMessageBuilderService
     {
+        private const string BreakLine = "\n";
+        private const string BreakParagraph = "\n +++ \n";
+        private const string Undefined = "undefined";
+
         public string BuildGreetingMessage()
         {
             return $"Hello, I would like to provide some information about the enviroment status of working location for you, please let me know what info you need?";
@@ -36,7 +40,7 @@ namespace ChatBot.Ultilities.Instances
                 locationNames.ForEach(locationName =>
                 {
                     // build header-result for each location
-                    var locationHeader = $"{locationName} are: \n";
+                    var locationHeader = $"{locationName} are: {BreakLine}";
                     if (!string.IsNullOrEmpty(commandInfo))
                     {
                         locationHeader = $"{commandInfo} of {locationHeader}";
@@ -47,9 +51,9 @@ namespace ChatBot.Ultilities.Instances
                     var roomsInLocation = rooms.Where(c => c.LocationName == locationName).ToList();
                     roomsInLocation.ForEach(room =>
                     {
+                        var ambientValue = string.Empty;
                         if (!string.IsNullOrEmpty(commandInfo))
                         {
-                            var ambientValue = "undefined";
                             switch (commandInfo)
                             {
                                 case "air":
@@ -68,22 +72,39 @@ namespace ChatBot.Ultilities.Instances
                                     ambientValue = room.Data.Temperature;
                                     break;
                             }
+                        }
 
+                        if (!string.IsNullOrEmpty(ambientValue))
+                        {
                             result += $"{ambientValue} at {room.RoomName}"
-                                    + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? ", \n" : "\n");
+                                + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? $", {BreakLine}" : BreakLine);
                         }
                         else
                         {
-                            result += $"air at {room.RoomName} is: {room.Data.AirQuality}"
-                                    + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? ", \n" : "\n");
-                            result += $"light at {room.RoomName} is: {room.Data.Brightness}"
-                                    + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? ", \n" : "\n");
-                            result += $"humidity at {room.RoomName} is: {room.Data.Humidity}"
-                                    + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? ", \n" : "\n");
-                            result += $"noise at {room.RoomName} is: {room.Data.Noise}"
-                                    + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? ", \n" : "\n");
-                            result += $"temp at {room.RoomName} is: {room.Data.Temperature}"
-                                    + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? ", \n" : "\n");
+                            if (!IsNullOrUndefined(room.Data.AirQuality))
+                            {
+                                result += $"air at {room.RoomName} is: {room.Data.AirQuality}";
+                            }
+                            if (!IsNullOrUndefined(room.Data.Brightness))
+                            {
+                                result += $",{BreakLine} birght at {room.RoomName} is: {room.Data.Brightness}";
+                            }
+                            if (!IsNullOrUndefined(room.Data.Humidity))
+                            {
+                                result += $",{BreakLine} humidity at {room.RoomName} is: {room.Data.Humidity}";
+                            }
+                            if (!IsNullOrUndefined(room.Data.Noise))
+                            {
+                                result += $",{BreakLine} noise at {room.RoomName} is: {room.Data.Noise}";
+                            }
+                            if (!IsNullOrUndefined(room.Data.Temperature))
+                            {
+                                result += $",{BreakLine} temperature at {room.RoomName} is: {room.Data.Temperature}";
+                            }
+                        }
+                        if (roomsInLocation.IndexOf(room) < (roomsInLocation.Count - 1))
+                        {
+                            result += BreakParagraph;
                         }
                     });
                 });
@@ -137,6 +158,11 @@ namespace ChatBot.Ultilities.Instances
             }
 
             return (isHasLocation, locationStr);
+        }
+
+        private bool IsNullOrUndefined(string str)
+        {
+            return string.IsNullOrEmpty(str) || str.Equals(Undefined);
         }
     }
 }

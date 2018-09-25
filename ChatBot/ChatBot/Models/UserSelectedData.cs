@@ -1,4 +1,6 @@
-﻿namespace ChatBot.Models
+﻿using ChatBot.Ultilities;
+
+namespace ChatBot.Models
 {
     public class UserSelectedData
     {
@@ -8,7 +10,7 @@
         {
             get
             {
-                return !string.IsNullOrEmpty(KeyInfo);
+                return !string.IsNullOrEmpty(KeyInfo) || Helper.IsContainsValue(typeof(KeyInfoValueEnum), KeyInfo);
             }
         }
 
@@ -18,7 +20,7 @@
         {
             get
             {
-                return !string.IsNullOrEmpty(LocationName);
+                return !string.IsNullOrEmpty(LocationName) || Helper.IsContainsValue(typeof(LocationValueEnum), LocationName);
             }
         }
 

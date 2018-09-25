@@ -8,6 +8,8 @@ namespace ChatBot.Dialogs
     [Serializable]
     public class SelectDialog : IDialog<string>
     {
+        protected Array SelectOptions;
+
         public async Task StartAsync(IDialogContext context)
         {
             PromptChoicetDialog.Choice(context, ReturnSelection, BuildOptions(), BuildPromptText(), BuildRetryText(), BuildAttemptsCount());
@@ -22,17 +24,33 @@ namespace ChatBot.Dialogs
 
         public virtual List<string> BuildOptions()
         {
-            return new List<string>();
+            var result = new List<string>();
+
+            BuildSelectOptionArray();
+            if (SelectOptions != null)
+            {
+                foreach (var value in SelectOptions)
+                {
+                    result.Add(value.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public virtual void BuildSelectOptionArray()
+        {
+            SelectOptions = new string[0];
         }
 
         public virtual string BuildPromptText()
         {
-            return "prompt text";
+            return "Sorry, but I cannot understand information you want get, so please select your choice or type Cancel to make another query:";
         }
 
         public virtual string BuildRetryText()
         {
-            return "retry text";
+            return "Sorry but we still cannot get your selected, please help us choice again or type Cancel to make another query:";
         }
 
         public virtual int BuildAttemptsCount()
