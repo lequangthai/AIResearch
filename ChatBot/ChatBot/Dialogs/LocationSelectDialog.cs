@@ -10,5 +10,10 @@ namespace ChatBot.Dialogs
         {
             SelectOptions = Enum.GetValues(typeof(LocationValueEnum));
         }
+
+        public override string BuildPromptText()
+        {
+            return "Sorry, but I cannot detect what location you want to get, so please select the location you want to know or type Cancel to make another query:";
+        }
     }
 }
