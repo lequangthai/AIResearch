@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using ChatBot.Ultilities.Interfaces;
 using Microsoft.Bot.Builder.Dialogs;
@@ -9,11 +10,17 @@ namespace ChatBot.Dialogs
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-        private IProccessMessageService _proccessMessageService;
+        protected IDeviceDataService _deviceDataService;
+        protected ISpellCheckService _spellCheckService;
+        protected IMessageBuilderService _messageBuilderService;
 
-        public RootDialog(IProccessMessageService proccessMessageService)
+        public RootDialog(IDeviceDataService deviceDataService,
+            ISpellCheckService spellCheckService,
+            IMessageBuilderService messageBuilderService)
         {
-            _proccessMessageService = proccessMessageService;
+            _deviceDataService = deviceDataService;
+            _spellCheckService = spellCheckService;
+            _messageBuilderService = messageBuilderService;
         }
 
         public Task StartAsync(IDialogContext context)
@@ -25,26 +32,43 @@ namespace ChatBot.Dialogs
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {
+            await ProccessMultiLanguageMessage(context, result);
+            return;
+
+
+            //var activity = await result as Activity;
+
+            //var message = context.MakeMessage(); 
+            //message.Text = activity.Text;
+
+            //var dialog = new RoomAssiantENLuisDialog(_deviceDataService, _spellCheckService, _messageBuilderService);
+            //await context.Forward(dialog, FormCompleteCallback, message, CancellationToken.None);
+        }
+
+        private async Task FormCompleteCallback(IDialogContext context, IAwaitable<object> input)
+        {
+            context.Done<object>(null);
+        }
+
+        private async Task ProccessMultiLanguageMessage(IDialogContext context, IAwaitable<object> result)
+        {
+            const string LCID = "LCID";
+
             var activity = await result as Activity;
-
-            var ambientData = string.Empty;
-            ambientData = _proccessMessageService.PipelineProccessGetData(activity.Text);
-
-            if (!string.IsNullOrEmpty(ambientData))
+            if (!context.PrivateConversationData.ContainsKey(LCID))
             {
-                // Return our reply to the user
-                await context.PostAsync(ambientData);
+                context.PrivateConversationData.SetValue(LCID, activity.Text);
             }
             else
             {
-                // Calculate something for us to return
+                var lcid = context.PrivateConversationData.GetValueOrDefault<string>(LCID);
+
                 int length = (activity.Text ?? string.Empty).Length;
+                await context.PostAsync($"You sent {activity.Text} which was {length} characters.  Your chosen language code is: {lcid}");
+                await context.PostAsync($"{Resources.Resource.String1}");
 
-                var message = $"You sent {activity.Text} which was {length} characters";
-                await context.PostAsync(message);
+                context.Wait(MessageReceivedAsync);
             }
-
-            context.Wait(MessageReceivedAsync);
         }
     }
 }

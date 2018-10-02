@@ -31,6 +31,11 @@ namespace ChatBot.Ultilities.Instances
             }
         }
 
+        public string BuildHelpMessage(string originalQuery)
+        {
+            return $"Sorry, I did not understand '{originalQuery}'. Type 'help' if you need assistance.";
+        }
+
         public string BuildStatusInfoMessage(string commandInfo, List<RoomDisplayModel> rooms)
         {
             var result = "";

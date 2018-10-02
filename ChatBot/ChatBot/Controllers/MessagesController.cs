@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
@@ -41,6 +42,17 @@ namespace ChatBot
                     // use autofact to resolve IDialog
                     using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
+                        var botData = scope.Resolve<IBotData>();
+                        await botData.LoadAsync(CancellationToken.None);
+
+                        var lcid = botData.PrivateConversationData.GetValueOrDefault<string>("LCID");
+                        if (!string.IsNullOrEmpty(lcid))
+                        {
+                            activity.Locale = lcid;
+                        }
+
+                        await botData.FlushAsync(CancellationToken.None);
+
                         await Conversation.SendAsync(activity, () => scope.Resolve<IDialog<object>>());
                     }
                 }

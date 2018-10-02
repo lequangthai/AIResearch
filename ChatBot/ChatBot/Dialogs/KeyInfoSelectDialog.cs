@@ -1,5 +1,6 @@
 ﻿using ChatBot.Ultilities;
 using System;
+using System.Collections.Generic;
 
 namespace ChatBot.Dialogs
 {
@@ -8,7 +9,14 @@ namespace ChatBot.Dialogs
     {
         public override void BuildSelectOptionArray()
         {
-            SelectOptions = Enum.GetValues(typeof(KeyInfoValueEnum));
+            var descs = new List<string>();
+            var enumValues = typeof(KeyInfoValueEnum).GetEnumValues();
+            foreach (KeyInfoValueEnum enumValue in enumValues)
+            {
+                descs.Add(enumValue.GetDescription());
+            }
+
+            SelectOptions = descs.ToArray();
         }
 
         public override string BuildPromptText()
