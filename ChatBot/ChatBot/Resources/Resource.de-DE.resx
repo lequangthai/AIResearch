@@ -117,7 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Air" xml:space="preserve">
+    <value>DE_Air</value>
+  </data>
+  <data name="AirValueDefine" xml:space="preserve">
+    <value>DE_air at {0} is: {1}</value>
+  </data>
+  <data name="AllInformation" xml:space="preserve">
+    <value>DE_AllInformation</value>
+  </data>
+  <data name="AreDefine2Phrase" xml:space="preserve">
+    <value>{0} de_are: {1}</value>
+  </data>
+  <data name="AtDefine2Phrase" xml:space="preserve">
+    <value>{0} de_at {1}</value>
+  </data>
+  <data name="BrightValueDefine" xml:space="preserve">
+    <value>,{0} de_birght at {1} is: {2}</value>
+  </data>
+  <data name="Greeting" xml:space="preserve">
+    <value>DE_Hello, I would like to provide some information about the enviroment status of working location for you, please let me know what info you need?</value>
+  </data>
+  <data name="HelpNotFoundLocation" xml:space="preserve">
+    <value>DE_Sorry, I cannot find any location in your input. Type 'help' if you need assistance.</value>
+  </data>
+  <data name="HelpNotFoundLocationInput" xml:space="preserve">
+    <value>DE_Sorry, I cannot find your input: '{0}'. Type 'help' if you need assistance.</value>
+  </data>
+  <data name="HelpNotUnderstand" xml:space="preserve">
+    <value>DE_Sorry, I did not understand '{0}'. Type 'help' if you need assistance.</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>DE_Humidity</value>
+  </data>
+  <data name="HumidityValueDefine" xml:space="preserve">
+    <value>,{0} de_humidity at {1} is: {2}</value>
+  </data>
+  <data name="InDefine2Phrase" xml:space="preserve">
+    <value>{0} de_in {1}</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>DE_Light</value>
+  </data>
+  <data name="LookForCurrentDefine" xml:space="preserve">
+    <value>DE_Looking for current status of '{0}'...</value>
+  </data>
+  <data name="LookForDefine" xml:space="preserve">
+    <value>DE_Looking for '{0}'...</value>
+  </data>
+  <data name="LookForInforOfDefine" xml:space="preserve">
+    <value>DE_Looking for '{0}' of '{1}'...</value>
+  </data>
+  <data name="Noise" xml:space="preserve">
+    <value>DE_Noise</value>
+  </data>
+  <data name="NoiseValueDefine" xml:space="preserve">
+    <value>,{0} de_noise at {1} is: {2}</value>
+  </data>
+  <data name="OfDefine2Phrase" xml:space="preserve">
+    <value>{0} de_of {1}</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>Deutsche Ressourcenkette</value>
+  </data>
+  <data name="String11" xml:space="preserve">
+    <value>DE_US English resource string</value>
+  </data>
+  <data name="Temp" xml:space="preserve">
+    <value>DE_Temp</value>
+  </data>
+  <data name="TemperatureValueDefine" xml:space="preserve">
+    <value>,{0} de_temperature at {1} is: {2}</value>
   </data>
 </root>

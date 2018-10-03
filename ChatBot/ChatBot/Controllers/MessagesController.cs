@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
@@ -42,10 +43,17 @@ namespace ChatBot
                     // use autofact to resolve IDialog
                     using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
+                        const string LCID = "LCID";
                         var botData = scope.Resolve<IBotData>();
                         await botData.LoadAsync(CancellationToken.None);
 
-                        var lcid = botData.PrivateConversationData.GetValueOrDefault<string>("LCID");
+                        var supportedLangues = new List<string> { "en-US", "fr-FR", "de-DE" };
+                        if (supportedLangues.Contains(activity.Text))
+                        {
+                            botData.PrivateConversationData.SetValue(LCID, activity.Text);
+                        }
+
+                        var lcid = botData.PrivateConversationData.GetValueOrDefault<string>(LCID);
                         if (!string.IsNullOrEmpty(lcid))
                         {
                             activity.Locale = lcid;

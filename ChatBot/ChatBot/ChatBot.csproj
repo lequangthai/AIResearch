@@ -244,11 +244,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Resource.uk-UA.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.uk-UA.resx</DependentUpon>
-    </Compile>
     <Compile Include="Ultilities\Constant.cs" />
     <Compile Include="Ultilities\Helper.cs" />
     <Compile Include="Services\Instances\MessageBuilderService.cs" />
@@ -282,10 +277,6 @@
     <EmbeddedResource Include="Resources\Resource.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.de-DE.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.uk-UA.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.uk-UA.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

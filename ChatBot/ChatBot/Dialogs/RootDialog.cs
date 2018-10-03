@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using ChatBot.Ultilities.Interfaces;
 using Microsoft.Bot.Builder.Dialogs;

@@ -70,11 +70,83 @@ namespace ChatBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to air at {0} is: {1}.
+        /// </summary>
+        internal static string AirValueDefine {
+            get {
+                return ResourceManager.GetString("AirValueDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AllInformation.
         /// </summary>
         internal static string AllInformation {
             get {
                 return ResourceManager.GetString("AllInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} are: {1}.
+        /// </summary>
+        internal static string AreDefine2Phrase {
+            get {
+                return ResourceManager.GetString("AreDefine2Phrase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} at {1}.
+        /// </summary>
+        internal static string AtDefine2Phrase {
+            get {
+                return ResourceManager.GetString("AtDefine2Phrase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ,{0} birght at {1} is: {2}.
+        /// </summary>
+        internal static string BrightValueDefine {
+            get {
+                return ResourceManager.GetString("BrightValueDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello, I would like to provide some information about the enviroment status of working location for you, please let me know what info you need?.
+        /// </summary>
+        internal static string Greeting {
+            get {
+                return ResourceManager.GetString("Greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, I cannot find any location in your input. Type &apos;help&apos; if you need assistance..
+        /// </summary>
+        internal static string HelpNotFoundLocation {
+            get {
+                return ResourceManager.GetString("HelpNotFoundLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, I cannot find your input: &apos;{0}&apos;. Type &apos;help&apos; if you need assistance..
+        /// </summary>
+        internal static string HelpNotFoundLocationInput {
+            get {
+                return ResourceManager.GetString("HelpNotFoundLocationInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, I did not understand &apos;{0}&apos;. Type &apos;help&apos; if you need assistance..
+        /// </summary>
+        internal static string HelpNotUnderstand {
+            get {
+                return ResourceManager.GetString("HelpNotUnderstand", resourceCulture);
             }
         }
         
@@ -88,11 +160,56 @@ namespace ChatBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ,{0} humidity at {1} is: {2}.
+        /// </summary>
+        internal static string HumidityValueDefine {
+            get {
+                return ResourceManager.GetString("HumidityValueDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} in {1}.
+        /// </summary>
+        internal static string InDefine2Phrase {
+            get {
+                return ResourceManager.GetString("InDefine2Phrase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Light.
         /// </summary>
         internal static string Light {
             get {
                 return ResourceManager.GetString("Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking for current status of &apos;{0}&apos;....
+        /// </summary>
+        internal static string LookForCurrentDefine {
+            get {
+                return ResourceManager.GetString("LookForCurrentDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking for &apos;{0}&apos;....
+        /// </summary>
+        internal static string LookForDefine {
+            get {
+                return ResourceManager.GetString("LookForDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking for &apos;{0}&apos; of &apos;{1}&apos;....
+        /// </summary>
+        internal static string LookForInforOfDefine {
+            get {
+                return ResourceManager.GetString("LookForInforOfDefine", resourceCulture);
             }
         }
         
@@ -106,11 +223,47 @@ namespace ChatBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ,{0} noise at {1} is: {2}.
+        /// </summary>
+        internal static string NoiseValueDefine {
+            get {
+                return ResourceManager.GetString("NoiseValueDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of {1}.
+        /// </summary>
+        internal static string OfDefine2Phrase {
+            get {
+                return ResourceManager.GetString("OfDefine2Phrase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to US English resource string.
         /// </summary>
         internal static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp.
+        /// </summary>
+        internal static string Temp {
+            get {
+                return ResourceManager.GetString("Temp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ,{0} temperature at {1} is: {2}.
+        /// </summary>
+        internal static string TemperatureValueDefine {
+            get {
+                return ResourceManager.GetString("TemperatureValueDefine", resourceCulture);
             }
         }
     }

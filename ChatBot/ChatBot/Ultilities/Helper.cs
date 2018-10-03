@@ -45,15 +45,16 @@ namespace ChatBot.Ultilities
 
         public static T GetEnumValue<T>(this string strDescription) where T : Enum
         {
-            var descs = new Dictionary<T, string>();
             var enumValues = typeof(T).GetEnumValues();
             foreach (T enumValue in enumValues)
             {
-                descs.Add(enumValue, enumValue.GetDescription());
+                if (enumValue.GetDescription().Equals(strDescription, StringComparison.OrdinalIgnoreCase))
+                {
+                    return enumValue;
+                }
             }
 
-            var enumKey = descs.FirstOrDefault(x => x.Value.Contains(strDescription)).Key;
-            return enumKey;
+            throw new Exception($"Cannot found Enum value for '{strDescription}'");
         }
     }
 

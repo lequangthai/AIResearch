@@ -120,19 +120,70 @@
   <data name="Air" xml:space="preserve">
     <value>Air</value>
   </data>
+  <data name="AirValueDefine" xml:space="preserve">
+    <value>air at {0} is: {1}</value>
+  </data>
   <data name="AllInformation" xml:space="preserve">
     <value>AllInformation</value>
+  </data>
+  <data name="AreDefine2Phrase" xml:space="preserve">
+    <value>{0} are: {1}</value>
+  </data>
+  <data name="AtDefine2Phrase" xml:space="preserve">
+    <value>{0} at {1}</value>
+  </data>
+  <data name="BrightValueDefine" xml:space="preserve">
+    <value>,{0} birght at {1} is: {2}</value>
+  </data>
+  <data name="Greeting" xml:space="preserve">
+    <value>Hello, I would like to provide some information about the enviroment status of working location for you, please let me know what info you need?</value>
+  </data>
+  <data name="HelpNotFoundLocation" xml:space="preserve">
+    <value>Sorry, I cannot find any location in your input. Type 'help' if you need assistance.</value>
+  </data>
+  <data name="HelpNotFoundLocationInput" xml:space="preserve">
+    <value>Sorry, I cannot find your input: '{0}'. Type 'help' if you need assistance.</value>
+  </data>
+  <data name="HelpNotUnderstand" xml:space="preserve">
+    <value>Sorry, I did not understand '{0}'. Type 'help' if you need assistance.</value>
   </data>
   <data name="Humidity" xml:space="preserve">
     <value>Humidity</value>
   </data>
+  <data name="HumidityValueDefine" xml:space="preserve">
+    <value>,{0} humidity at {1} is: {2}</value>
+  </data>
+  <data name="InDefine2Phrase" xml:space="preserve">
+    <value>{0} in {1}</value>
+  </data>
   <data name="Light" xml:space="preserve">
     <value>Light</value>
+  </data>
+  <data name="LookForCurrentDefine" xml:space="preserve">
+    <value>Looking for current status of '{0}'...</value>
+  </data>
+  <data name="LookForDefine" xml:space="preserve">
+    <value>Looking for '{0}'...</value>
+  </data>
+  <data name="LookForInforOfDefine" xml:space="preserve">
+    <value>Looking for '{0}' of '{1}'...</value>
   </data>
   <data name="Noise" xml:space="preserve">
     <value>Noise</value>
   </data>
+  <data name="NoiseValueDefine" xml:space="preserve">
+    <value>,{0} noise at {1} is: {2}</value>
+  </data>
+  <data name="OfDefine2Phrase" xml:space="preserve">
+    <value>{0} of {1}</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>US English resource string</value>
+  </data>
+  <data name="Temp" xml:space="preserve">
+    <value>Temp</value>
+  </data>
+  <data name="TemperatureValueDefine" xml:space="preserve">
+    <value>,{0} temperature at {1} is: {2}</value>
   </data>
 </root>
