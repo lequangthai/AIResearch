@@ -14,5 +14,7 @@ namespace ChatBot.Ultilities.Interfaces
         string BuildStatusInfoMessage(string commandInfo, List<RoomDisplayModel> rooms);
 
         string ProccessWaitingMessage(UserSelectedData userSelectedData);
+
+        string BuildHelpMessage(string originalQuery);
     }
 }

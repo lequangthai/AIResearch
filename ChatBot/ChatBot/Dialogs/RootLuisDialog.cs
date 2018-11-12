@@ -42,7 +42,7 @@ namespace ChatBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            string message = $"Sorry, I did not understand '{result.Query}'. Type 'help' if you need assistance.";
+            string message = _messageBuilderService.BuildHelpMessage(result.Query);
 
             await PostMessage(context, message);
 

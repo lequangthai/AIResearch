@@ -10,11 +10,10 @@ namespace ChatBot.Ultilities.Instances
     {
         private const string BreakLine = "\n";
         private const string BreakParagraph = "\n +++ \n";
-        private const string Undefined = "undefined";
-
+        
         public string BuildGreetingMessage()
         {
-            return $"Hello, I would like to provide some information about the enviroment status of working location for you, please let me know what info you need?";
+            return Resources.Resource.Greeting;
         }
 
         public string BuildHelpMessage(UserSelectedData userSelectedData)
@@ -23,12 +22,17 @@ namespace ChatBot.Ultilities.Instances
 
             if (isHasLocation)
             {
-                return $"Sorry, I cannot find your input: '{locationStr}'. Type 'help' if you need assistance.";
+                return string.Format(Resources.Resource.HelpNotFoundLocationInput, locationStr);
             }
             else
             {
-                return $"Sorry, I cannot find any location in your input. Type 'help' if you need assistance.";
+                return Resources.Resource.HelpNotFoundLocation;
             }
+        }
+
+        public string BuildHelpMessage(string originalQuery)
+        {
+            return string.Format(Resources.Resource.HelpNotUnderstand, originalQuery);
         }
 
         public string BuildStatusInfoMessage(string commandInfo, List<RoomDisplayModel> rooms)
@@ -40,10 +44,10 @@ namespace ChatBot.Ultilities.Instances
                 locationNames.ForEach(locationName =>
                 {
                     // build header-result for each location
-                    var locationHeader = $"{locationName} are: {BreakLine}";
+                    var locationHeader = string.Format(Resources.Resource.AreDefine2Phrase, locationName, BreakLine);
                     if (!string.IsNullOrEmpty(commandInfo))
                     {
-                        locationHeader = $"{commandInfo} of {locationHeader}";
+                        locationHeader = string.Format(Resources.Resource.OfDefine2Phrase, commandInfo, locationHeader);
                     }
                     result = result + locationHeader;
 
@@ -54,21 +58,22 @@ namespace ChatBot.Ultilities.Instances
                         var ambientValue = string.Empty;
                         if (!string.IsNullOrEmpty(commandInfo))
                         {
-                            switch (commandInfo)
+                            var keyInfoCommand = commandInfo.GetEnumValue<KeyInfoValueEnum>();
+                            switch (keyInfoCommand)
                             {
-                                case "air":
+                                case KeyInfoValueEnum.Air:
                                     ambientValue = room.Data.AirQuality;
                                     break;
-                                case "light":
+                                case KeyInfoValueEnum.Light:
                                     ambientValue = room.Data.Brightness;
                                     break;
-                                case "humidity":
+                                case KeyInfoValueEnum.Humidity:
                                     ambientValue = room.Data.Humidity;
                                     break;
-                                case "noise":
+                                case KeyInfoValueEnum.Noise:
                                     ambientValue = room.Data.Noise;
                                     break;
-                                case "temp":
+                                case KeyInfoValueEnum.Temp:
                                     ambientValue = room.Data.Temperature;
                                     break;
                             }
@@ -76,30 +81,30 @@ namespace ChatBot.Ultilities.Instances
 
                         if (!string.IsNullOrEmpty(ambientValue))
                         {
-                            result += $"{ambientValue} at {room.RoomName}"
+                            result += string.Format(Resources.Resource.AtDefine2Phrase, ambientValue, room.RoomName)
                                 + (roomsInLocation.IndexOf(room) != (roomsInLocation.Count - 1) ? $", {BreakLine}" : BreakLine);
                         }
                         else
                         {
                             if (!IsNullOrUndefined(room.Data.AirQuality))
                             {
-                                result += $"air at {room.RoomName} is: {room.Data.AirQuality}";
+                                result += string.Format(Resources.Resource.AirValueDefine, room.RoomName, room.Data.AirQuality);
                             }
                             if (!IsNullOrUndefined(room.Data.Brightness))
                             {
-                                result += $",{BreakLine} birght at {room.RoomName} is: {room.Data.Brightness}";
+                                result += string.Format(Resources.Resource.BrightValueDefine, BreakLine, room.RoomName, room.Data.Brightness);
                             }
                             if (!IsNullOrUndefined(room.Data.Humidity))
                             {
-                                result += $",{BreakLine} humidity at {room.RoomName} is: {room.Data.Humidity}";
+                                result += string.Format(Resources.Resource.HumidityValueDefine, BreakLine, room.RoomName, room.Data.Humidity);
                             }
                             if (!IsNullOrUndefined(room.Data.Noise))
                             {
-                                result += $",{BreakLine} noise at {room.RoomName} is: {room.Data.Noise}";
+                                result += string.Format(Resources.Resource.NoiseValueDefine, BreakLine, room.RoomName, room.Data.Noise);
                             }
                             if (!IsNullOrUndefined(room.Data.Temperature))
                             {
-                                result += $",{BreakLine} temperature at {room.RoomName} is: {room.Data.Temperature}";
+                                result += string.Format(Resources.Resource.TemperatureValueDefine, BreakLine, room.RoomName, room.Data.Temperature);
                             }
                         }
                         if (roomsInLocation.IndexOf(room) < (roomsInLocation.Count - 1))
@@ -119,7 +124,7 @@ namespace ChatBot.Ultilities.Instances
 
             if (userSelectedData.IsHasKeyInfo && isHasLocation)
             {
-                return $"Looking for '{userSelectedData.KeyInfo}' of '{locationStr}'...";
+                return string.Format(Resources.Resource.LookForInforOfDefine, userSelectedData.KeyInfo, locationStr);
             }
             else
             {
@@ -127,16 +132,16 @@ namespace ChatBot.Ultilities.Instances
                 {
                     if (userSelectedData.IsHasKeyInfo)
                     {
-                        return $"Looking for '{userSelectedData.KeyInfo}'...";
+                        return string.Format(Resources.Resource.LookForDefine, userSelectedData.KeyInfo);
                     }
                     else
                     {
-                        return $"Looking for current status of '{locationStr}'...";
+                        return string.Format(Resources.Resource.LookForCurrentDefine, locationStr);
                     }
                 }
                 else
                 {
-                    return $"Sorry, I did not understand '{userSelectedData.LastInputMessage}'. Type 'help' if you need assistance.";
+                    return string.Format(Resources.Resource.HelpNotUnderstand, userSelectedData.LastInputMessage);
                 }
             }
         }
@@ -149,7 +154,7 @@ namespace ChatBot.Ultilities.Instances
             {
                 if (userSelectedData.IsHasLocationName && userSelectedData.IsHasRoomName)
                 {
-                    locationStr = $"{userSelectedData.RoomName} in {userSelectedData.LocationName}";
+                    locationStr = string.Format(Resources.Resource.InDefine2Phrase, userSelectedData.RoomName, userSelectedData.LocationName);
                 }
                 else
                 {
@@ -162,6 +167,7 @@ namespace ChatBot.Ultilities.Instances
 
         private bool IsNullOrUndefined(string str)
         {
+            const string Undefined = "undefined";
             return string.IsNullOrEmpty(str) || str.Equals(Undefined);
         }
     }

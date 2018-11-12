@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
@@ -19,6 +21,12 @@ namespace ChatBot
     public class MessagesController : ApiController
     {
         private readonly IProccessMessageService _proccessMessageService;
+        public Dictionary<string, string> languages = new Dictionary<string, string>
+        {
+            { "en", AppConstants.EnglishLanguageCode},
+            { "de", AppConstants.GermanLanguageCode},
+            { "fr", AppConstants.FrenchLanguageCode}
+        };
 
         public MessagesController()
         {
@@ -43,7 +51,23 @@ namespace ChatBot
                     // use autofact to resolve IDialog
                     using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
-                        switch (language)
+                        // Set language for Resources
+                        var botData = scope.Resolve<IBotData>();
+                        await botData.LoadAsync(CancellationToken.None);
+
+                        languages.TryGetValue(language, out string languageValue);
+                        botData.PrivateConversationData.SetValue(AppConstants.LCID, languageValue);
+
+                        var LCID = botData.PrivateConversationData.GetValueOrDefault<string>(AppConstants.LCID);
+                        if (!string.IsNullOrEmpty(LCID))
+                        {
+                            activity.Locale = LCID;
+                        }
+
+                        await botData.FlushAsync(CancellationToken.None);
+
+                        // Re-direct to correct language class
+                        switch (languageValue)
                         {
                             case AppConstants.GermanLanguageCode:
                                 await Conversation.SendAsync(activity, () => scope.Resolve<IGermanDialog<object>>());
