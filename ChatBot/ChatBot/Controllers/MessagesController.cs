@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
+using ChatBot.Interfaces;
+using ChatBot.Ultilities;
 using ChatBot.Ultilities.Instances;
 using ChatBot.Ultilities.Interfaces;
 using Microsoft.Bot.Builder.Dialogs;
@@ -36,12 +38,20 @@ namespace ChatBot
             {
                 if (activity.GetActivityType() == ActivityTypes.Message)
                 {
-                    // activity.Text = _proccessMessageService.PipelineProccessTranslate(activity.Text);
-                    
+                    var language = _proccessMessageService.PipelineProccessTranslate(activity.Text);
+
                     // use autofact to resolve IDialog
                     using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
-                        await Conversation.SendAsync(activity, () => scope.Resolve<IDialog<object>>());
+                        switch (language)
+                        {
+                            case AppConstants.GermanLanguageCode:
+                                await Conversation.SendAsync(activity, () => scope.Resolve<IGermanDialog<object>>());
+                                break;
+                            case AppConstants.EnglishLanguageCode:
+                                await Conversation.SendAsync(activity, () => scope.Resolve<IEnglishDialog<object>>());
+                                break;
+                        }
                     }
                 }
                 else

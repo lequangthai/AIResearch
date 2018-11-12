@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ChatBot.Interfaces;
 using ChatBot.Models;
 using ChatBot.Ultilities;
 using ChatBot.Ultilities.Interfaces;
@@ -33,6 +34,8 @@ namespace ChatBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             SetUserSelectedData(context, new UserSelectedData());
+            context.Wait(MessageReceived);
+            await Task.CompletedTask;
         }
 
         [LuisIntent("")]
@@ -43,7 +46,7 @@ namespace ChatBot.Dialogs
 
             await PostMessage(context, message);
 
-            context.Wait(this.MessageReceived);
+            context.Wait(MessageReceived);
         }
 
         [LuisIntent("GetCurrentStatus")]
@@ -99,7 +102,7 @@ namespace ChatBot.Dialogs
         private UserSelectedData GetUserSelectedData(IDialogContext context)
         {
             UserSelectedData userSelectedData = null;
-            context.UserData.TryGetValue<UserSelectedData>(Constant.UserSelectedDataKey, out userSelectedData);
+            context.UserData.TryGetValue<UserSelectedData>(AppConstants.UserSelectedDataKey, out userSelectedData);
             if (userSelectedData == null)
             {
                 userSelectedData = new UserSelectedData();
@@ -110,7 +113,7 @@ namespace ChatBot.Dialogs
 
         private void SetUserSelectedData(IDialogContext context, UserSelectedData userSelectedData)
         {
-            context.UserData.SetValue<UserSelectedData>(Constant.UserSelectedDataKey, userSelectedData);
+            context.UserData.SetValue<UserSelectedData>(AppConstants.UserSelectedDataKey, userSelectedData);
         }
 
         private void TryProccessLUISResultToUserSelectedData(IDialogContext context, LuisResult result)

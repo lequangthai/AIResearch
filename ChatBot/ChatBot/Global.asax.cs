@@ -9,6 +9,7 @@ using ChatBot.Dialogs;
 using ChatBot.Ultilities.Instances;
 using ChatBot.Ultilities.Interfaces;
 using Microsoft.Bot.Builder.Internals.Fibers;
+using ChatBot.Interfaces;
 
 namespace ChatBot
 {
@@ -23,8 +24,12 @@ namespace ChatBot
             {
                 builder.RegisterModule(new AzureModule(Assembly.GetExecutingAssembly()));
 
-                builder.RegisterType<RootLuisDialog>()
-                  .As<IDialog<object>>()
+                builder.RegisterType<GermanLuisDialog>()
+                  .As<IGermanDialog<object>>()
+                  .InstancePerDependency();
+
+                builder.RegisterType<EnglishLuisDialog>()
+                  .As<IEnglishDialog<object>>()
                   .InstancePerDependency();
 
                 builder.RegisterType<AWSDeviceDataService>()

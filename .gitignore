@@ -1178,3 +1178,5 @@ ChatBot/ChatBot/obj/Debug/ChatBot.csprojAssemblyReference.cache
 ChatBot/ChatBot/obj/Debug/ChatBot.csproj.FileListAbsolute.txt
 ChatBot/ChatBot/obj/Debug/ChatBot.csproj.CoreCompileInputs.cache
 ChatBot/ChatBot/obj/Debug/ChatBot.csproj.CopyComplete
+ChatBot/ChatBot/obj/Debug/build.force
+ChatBot/packages/Microsoft.AspNet.WebApi.Client.5.2.3/.signature.p7s

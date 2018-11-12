@@ -31,9 +31,9 @@ namespace ChatBot.Ultilities.Instances
                 var response = client.SendAsync(request).Result;
                 var responseBody = response.Content.ReadAsStringAsync().Result;
                 var result = JsonConvert.SerializeObject(JsonConvert.DeserializeObject(responseBody), Formatting.Indented);
+                dynamic translationObjs = JsonConvert.DeserializeObject(responseBody);
 
-                Console.OutputEncoding = UnicodeEncoding.UTF8;
-                return result;
+                return translationObjs[0]?.detectedLanguage?.language;
             }
         }
     }

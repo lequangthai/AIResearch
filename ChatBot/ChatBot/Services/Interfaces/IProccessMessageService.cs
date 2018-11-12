@@ -1,4 +1,5 @@
-﻿namespace ChatBot.Ultilities.Interfaces
+﻿
+namespace ChatBot.Ultilities.Interfaces
 {
     public interface IProccessMessageService
     {
