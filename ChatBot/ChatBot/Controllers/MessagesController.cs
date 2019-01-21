@@ -75,6 +75,9 @@ namespace ChatBot
                             case AppConstants.EnglishLanguageCode:
                                 await Conversation.SendAsync(activity, () => scope.Resolve<IEnglishDialog<object>>());
                                 break;
+                            case AppConstants.FrenchLanguageCode:
+                                await Conversation.SendAsync(activity, () => scope.Resolve<IFrenchDialog<object>>());
+                                break;
                         }
                     }
                 }

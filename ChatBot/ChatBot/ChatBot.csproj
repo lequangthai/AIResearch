@@ -211,9 +211,9 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Dialogs\AbstractLuisDialog.cs" />
-    <Compile Include="Dialogs\EnglishLuisDialog.cs" />
-    <Compile Include="Dialogs\GermanLuisDialog.cs" />
+    <Compile Include="Dialogs\Languages\AbstractLuisDialog.cs" />
+    <Compile Include="Dialogs\Languages\EnglishLuisDialog.cs" />
+    <Compile Include="Dialogs\Languages\GermanLuisDialog.cs" />
     <Compile Include="Dialogs\LocationSelectDialog.cs" />
     <Compile Include="Dialogs\KeyInfoSelectDialog.cs" />
     <Compile Include="Dialogs\RootLuisDialog.cs" />
@@ -230,6 +230,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IEnglishDialog.cs" />
+    <Compile Include="Interfaces\IFrenchDialog.cs" />
     <Compile Include="Interfaces\IGermanDialog.cs" />
     <Compile Include="Models\Mappers\RoomDisplayModelMapper.cs" />
     <Compile Include="Models\RoomDisplayModel.cs" />
@@ -293,6 +294,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\bbvChatBot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\BBVOfficeStatusChatBot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ChatBot20180622032403 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
