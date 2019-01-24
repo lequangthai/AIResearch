@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace ChatBot.Ultilities.Instances
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ApiKey);
-                    
+
                     var values = new Dictionary<string, string>
                     {
                         { "text", text }
@@ -48,8 +49,13 @@ namespace ChatBot.Ultilities.Instances
                     var content = new FormUrlEncodedContent(values);
 
                     var response = client.PostAsync(SpellCheckApiUrl, content).Result;
-                    var responseString = response.Content.ReadAsStringAsync().Result;
 
+                    if (response.StatusCode != HttpStatusCode.OK)
+                    {
+                        return text;
+                    }
+
+                    var responseString = response.Content.ReadAsStringAsync().Result;
                     var spellCheckResponse = JsonConvert.DeserializeObject<BingSpellCheckResponse>(responseString);
 
                     StringBuilder sb = new StringBuilder();

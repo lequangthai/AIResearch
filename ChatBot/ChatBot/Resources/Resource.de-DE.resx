@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Air" xml:space="preserve">
-    <value>DE_Air</value>
+    <value>de_Air</value>
   </data>
   <data name="AirValueDefine" xml:space="preserve">
-    <value>DE_air at {0} is: {1}</value>
+    <value>de_air at {0} is: {1}</value>
   </data>
   <data name="AllInformation" xml:space="preserve">
-    <value>DE_AllInformation</value>
+    <value>de_AllInformation</value>
   </data>
   <data name="AreDefine2Phrase" xml:space="preserve">
     <value>{0} de_are: {1}</value>

@@ -30,5 +30,11 @@ namespace ChatBot.Dialogs
             PostMessage(context, message).Wait();
             return base.GetGreetingMessage(context, result);
         }
+
+        public override Task GetHelp(IDialogContext context, LuisResult result)
+        {
+            
+            return base.GetHelp(context, result);
+        }
     }
 }

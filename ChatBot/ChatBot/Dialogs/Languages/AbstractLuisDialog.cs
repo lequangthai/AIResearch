@@ -48,14 +48,17 @@ namespace ChatBot.Dialogs
         public virtual Task GetLocationStatus(IDialogContext context, LuisResult result)
         {
             ProccessLUISResultToContext(context, result);
-            ProccessGetCurrentStatusMessage(context);
+            ProccessGetCurrentStatusMessage(context).Wait();
             return Task.CompletedTask;
         }
 
         [LuisIntent("Help")]
         public virtual Task GetHelp(IDialogContext context, LuisResult result)
         {
-            context.Wait(MessageReceived);
+            var userSelectedData = Helper.GetUserSelectedData(context);
+
+            var message = MessageBuilderService.BuildHelpMessage(userSelectedData);
+            PostMessage(context, message).Wait();
             return Task.CompletedTask;
         }
 
@@ -80,7 +83,7 @@ namespace ChatBot.Dialogs
                 EntityRecommendation locationEntityRecommendation,
                 EntityRecommendation roomNameRecommendation) = TryParseLUISResult(result);
 
-            var userSelectedData = GetUserSelectedData(context);
+            var userSelectedData = Helper.GetUserSelectedData(context);
             userSelectedData.LastInputMessage = result.Query;
             if (keyInfoEntityRecommendation != null)
             {
@@ -119,7 +122,7 @@ namespace ChatBot.Dialogs
 
         private async Task ProccessGetCurrentStatusMessage(IDialogContext context)
         {
-            var userSelectedData = GetUserSelectedData(context);
+            var userSelectedData = Helper.GetUserSelectedData(context);
             if (!IsValidUserSelectedData(userSelectedData, context)) return;
 
             var waitingMessage = MessageBuilderService.ProccessWaitingMessage(userSelectedData);
@@ -136,20 +139,12 @@ namespace ChatBot.Dialogs
             context.Wait(this.MessageReceived);
         }
 
-        private UserSelectedData GetUserSelectedData(IDialogContext context)
-        {
-            UserSelectedData userSelectedData = null;
-            context.UserData.TryGetValue(AppConstants.UserSelectedDataKey, out userSelectedData);
-            if (userSelectedData == null)
-            {
-                userSelectedData = new UserSelectedData();
-            }
-
-            return userSelectedData;
-        }
-
         private void SetUserSelectedData(IDialogContext context, UserSelectedData userSelectedData)
         {
+            if (context.UserData.ContainsKey(AppConstants.UserSelectedDataKey))
+            {
+                context.UserData.RemoveValue(AppConstants.UserSelectedDataKey);
+            }
             context.UserData.SetValue(AppConstants.UserSelectedDataKey, userSelectedData);
         }
 
@@ -190,7 +185,7 @@ namespace ChatBot.Dialogs
 
             if (!string.IsNullOrEmpty(selection))
             {
-                var userSelectedData = GetUserSelectedData(context);
+                var userSelectedData = Helper.GetUserSelectedData(context);
                 typeof(UserSelectedData).GetProperty(propertyName).SetValue(userSelectedData, selection);
                 SetUserSelectedData(context, userSelectedData);
 

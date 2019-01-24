@@ -10,13 +10,22 @@ namespace ChatBot.Ultilities.Instances
     {
         private const string BreakLine = "\n";
         private const string BreakParagraph = "\n +++ \n";
-        
+
         public string BuildGreetingMessage()
         {
             return Resources.Resource.Greeting;
         }
 
         public string BuildHelpMessage(UserSelectedData userSelectedData)
+        {
+            if (!userSelectedData.IsHasKeyInfo && !userSelectedData.IsHasLocationName &&! userSelectedData.IsHasRoomName)
+            {
+                return Resources.Resource.HelpWithInstruction;
+            }
+            return string.Empty;
+        }
+
+        public string BuildNotFoundMessage(UserSelectedData userSelectedData)
         {
             (bool isHasLocation, string locationStr) = GetLocationString(userSelectedData);
 

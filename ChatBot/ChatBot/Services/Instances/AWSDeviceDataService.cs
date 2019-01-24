@@ -41,7 +41,7 @@ namespace ChatBot.Ultilities.Instances
                 }
                 else
                 {
-                    return _messageBuilderService.BuildHelpMessage(userSelectedData);
+                    return _messageBuilderService.BuildNotFoundMessage(userSelectedData);
                 }
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace ChatBot.Ultilities.Instances
 
             }
 
-            return "Error!";
+            return Resources.Resource.HelpWithInstruction;
         }
 
         private List<DevicesInLocation> GetDevicesInLocation(AmazonDynamoDBClient client, UserSelectedData userSelectedData)

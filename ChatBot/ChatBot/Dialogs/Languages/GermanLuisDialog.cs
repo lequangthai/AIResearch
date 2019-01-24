@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatBot.Dialogs
 {
-    [LuisModel("0d1438e2-451a-4bee-9a24-40edffb356e0", "e6503e8c566643749f096dc32d970439", domain: "southeastasia.api.cognitive.microsoft.com")]
+    [LuisModel("a7be38d4-604b-4e03-82f7-211d82b461df", "840e23e376be4fb1929fba8385a06d1e", domain: "westus.api.cognitive.microsoft.com")]
     [Serializable]
     public class GermanLuisDialog : AbstractLuisDialog, IGermanDialog<object>
     {

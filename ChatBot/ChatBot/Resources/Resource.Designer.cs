@@ -79,7 +79,7 @@ namespace ChatBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AllInformation.
+        ///   Looks up a localized string similar to All information.
         /// </summary>
         internal static string AllInformation {
             get {
@@ -147,6 +147,18 @@ namespace ChatBot.Resources {
         internal static string HelpNotUnderstand {
             get {
                 return ResourceManager.GetString("HelpNotUnderstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can lookup information by following examples:
+        ///- air of Zug
+        ///- get temp of Zürich
+        ///- air in Küche of Bern.
+        /// </summary>
+        internal static string HelpWithInstruction {
+            get {
+                return ResourceManager.GetString("HelpWithInstruction", resourceCulture);
             }
         }
         

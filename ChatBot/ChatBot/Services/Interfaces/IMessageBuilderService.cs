@@ -9,11 +9,13 @@ namespace ChatBot.Ultilities.Interfaces
     {
         string BuildGreetingMessage();
 
-        string BuildHelpMessage(UserSelectedData userSelectedData);
+        string BuildNotFoundMessage(UserSelectedData userSelectedData);
 
         string BuildStatusInfoMessage(string commandInfo, List<RoomDisplayModel> rooms);
 
         string ProccessWaitingMessage(UserSelectedData userSelectedData);
+
+        string BuildHelpMessage(UserSelectedData userSelectedData);
 
         string BuildHelpMessage(string originalQuery);
     }

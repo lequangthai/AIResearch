@@ -124,7 +124,7 @@
     <value>air at {0} is: {1}</value>
   </data>
   <data name="AllInformation" xml:space="preserve">
-    <value>AllInformation</value>
+    <value>All information</value>
   </data>
   <data name="AreDefine2Phrase" xml:space="preserve">
     <value>{0} are: {1}</value>
@@ -146,6 +146,12 @@
   </data>
   <data name="HelpNotUnderstand" xml:space="preserve">
     <value>Sorry, I did not understand '{0}'. Type 'help' if you need assistance.</value>
+  </data>
+  <data name="HelpWithInstruction" xml:space="preserve">
+    <value>You can lookup information by following examples:
+- air of Zug
+- get temp of Zürich
+- air in Küche of Bern</value>
   </data>
   <data name="Humidity" xml:space="preserve">
     <value>Humidity</value>

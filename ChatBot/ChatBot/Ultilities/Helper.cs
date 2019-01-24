@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ChatBot.Models;
+using Microsoft.Bot.Builder.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -55,6 +57,18 @@ namespace ChatBot.Ultilities
             }
 
             throw new Exception($"Cannot found Enum value for '{strDescription}'");
+        }
+
+        public static UserSelectedData GetUserSelectedData(IDialogContext context)
+        {
+            UserSelectedData userSelectedData = null;
+            context.UserData.TryGetValue(AppConstants.UserSelectedDataKey, out userSelectedData);
+            if (userSelectedData == null)
+            {
+                userSelectedData = new UserSelectedData();
+            }
+
+            return userSelectedData;
         }
     }
 
