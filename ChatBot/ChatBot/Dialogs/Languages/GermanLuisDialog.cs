@@ -30,5 +30,10 @@ namespace ChatBot.Dialogs
             PostMessage(context, message).Wait();
             return base.GetGreetingMessage(context, result);
         }
+
+        public override Task GetLocationStatus(IDialogContext context, LuisResult result)
+        {
+            return base.GetLocationStatus(context, result);
+        }
     }
 }
