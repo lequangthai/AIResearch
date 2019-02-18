@@ -9,6 +9,61 @@
       "appPassword": "",
       "endpoint": "http://localhost:3978/api/messages",
       "name": "BBVChatBot"
+    },
+    {
+      "type": "abs",
+      "tenantId": "279985bd-2077-4d9d-9797-42238cfc06e2",
+      "subscriptionId": "16fa19dc-8bab-4fde-b0cb-b50a03c3bc5b",
+      "resourceGroup": "ShowcaseChatbot",
+      "serviceName": "BBVChatBox",
+      "name": "BBVChatBox",
+      "id": "1",
+      "appId": "0bbc0e6e-0431-4c73-bb3c-7e8612a36096"
+    },
+    {
+      "type": "blob",
+      "connectionString": "DefaultEndpointsProtocol=https;AccountName=bbvchatboxb34e;AccountKey=8yC7u5lZyUfCpZH4nEVWApNA0LkDi0PF2DWJH/tNj7O/Pfzsqvm8uBWxVLKFBGA8rZOarwgBmirVFmsiw27C8A==;",
+      "tenantId": "279985bd-2077-4d9d-9797-42238cfc06e2",
+      "subscriptionId": "16fa19dc-8bab-4fde-b0cb-b50a03c3bc5b",
+      "resourceGroup": "ShowcaseChatbot",
+      "serviceName": "bbvchatboxb34e",
+      "id": "2"
+    },
+    {
+      "type": "endpoint",
+      "appId": "",
+      "appPassword": "",
+      "endpoint": "http://localhost:3978/api/messages",
+      "name": "development",
+      "id": "3"
+    },
+    {
+      "type": "endpoint",
+      "appId": "0bbc0e6e-0431-4c73-bb3c-7e8612a36096",
+      "appPassword": "+h4G3$[TN1SoiPNnoJjUj&KS",
+      "endpoint": "https://bbvchatbox.azurewebsites.net/api/messages",
+      "name": "production",
+      "id": "4"
+    },
+    {
+      "type": "appInsights",
+      "instrumentationKey": "12867da1-5b25-451f-9e42-1c0a77bbcb81",
+      "applicationId": "32338e4e-5767-437d-a2c6-2facc6033df5",
+      "apiKeys": {},
+      "tenantId": "279985bd-2077-4d9d-9797-42238cfc06e2",
+      "subscriptionId": "16fa19dc-8bab-4fde-b0cb-b50a03c3bc5b",
+      "resourceGroup": "ShowcaseChatbot",
+      "serviceName": "BBVChatBox65p2ou",
+      "id": "5"
+    },
+    {
+      "type": "luis",
+      "appId": "424c36c0-9dc6-437b-8b4a-8d6eb8034988",
+      "authoringKey": "d0d8a14ef2ce4bf8a49b6002bd44f4c0",
+      "version": "0.1",
+      "region": "westus",
+      "name": "BasicBotLuisApplication",
+      "id": "6"
     }
   ]
 }
